@@ -11,6 +11,14 @@ jobs:
     env:
       PYTHONIOENCODING: utf-8
     steps:
+    - name: Debug Environment Variable
+      run: |
+        if [ -z "${{ secrets.ANYROUTER_ACCOUNTS }}" ]; then
+          echo "❌ 环境变量 ANYROUTER_ACCOUNTS 确实是空的"
+          exit 1
+        else
+          echo "✅ 变量已存在（虽然日志会打码，但逻辑走到了这里）"
+        fi
     - uses: actions/checkout@v4
 
     - uses: astral-sh/setup-uv@v3
